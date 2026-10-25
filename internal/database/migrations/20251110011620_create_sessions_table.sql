@@ -1,0 +1,14 @@
+-- +goose Up
+-- +goose StatementBegin
+CREATE TABLE sessions (
+  token VARCHAR(43) PRIMARY KEY,
+  data BYTEA NOT NULL,
+  expiry TIMESTAMP(6) NOT NULL
+);
+CREATE INDEX sessions_expiry_idx ON sessions (expiry);
+-- +goose StatementEnd
+
+-- +goose Down
+-- +goose StatementBegin
+DROP TABLE IF EXISTS sessions;
+-- +goose StatementEnd
